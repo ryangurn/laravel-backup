@@ -122,6 +122,13 @@ class BackupJob
         return $this;
     }
 
+    public function appendFilename(string $append): self 
+    {
+        $this->filename .= $append;
+
+        return $this;
+    }
+
     public function onlyBackupTo(string $diskName): self
     {
         $this->backupDestinations = $this->backupDestinations->filter(
