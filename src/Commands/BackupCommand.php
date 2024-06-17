@@ -15,7 +15,7 @@ class BackupCommand extends BaseCommand implements Isolatable
 {
     use Retryable;
 
-    protected $signature = 'backup:run {--filename=} {--only-db} {--db-name=*} {--only-files} {--only-to-disk=} {--disable-notifications} {--timeout=} {--tries=}';
+    protected $signature = 'backup:run {--filename=} {--filename-append=} {--only-db} {--db-name=*} {--only-files} {--only-to-disk=} {--disable-notifications} {--timeout=} {--tries=}';
 
     protected $description = 'Run the backup.';
 
@@ -57,6 +57,10 @@ class BackupCommand extends BaseCommand implements Isolatable
 
             if ($this->option('filename')) {
                 $backupJob->setFilename($this->option('filename'));
+            }
+
+            if ($this->option('filename-append')) {
+                $backupJob->appendFilename($this->option('filename-append'));
             }
 
             $this->setTries('backup');
